@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+           text-align: center;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
+            background:linear-gradient(to bottom, #2771d1 0%,#12daae 100%);
+        }
+        .container h1 {
+            color: white;;
+        }
+        .container p {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;;
+
+        }
+        .container p:nth-child(3) {
+            background-color: #ffc107;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .container p:nth-child(4) {
+            background-color: #0eec0e;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .container p:nth-child(5) {
+            background-color: #e6606d;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .container p:nth-child(6) {
+            background-color: #f10808;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .bmi-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-control{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    color: white;
+}
+.form-control span {
+    font-size: 20px;
+    font-weight: bold;
+   
+}
+input[type="range"]{
+    width: 70%;
+    height: 10px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #dcdcdc;
+    border-radius: 3px;
+    outline: none;
+}
+#result {
+   color:white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px black;
+
+}
+.green{
+    background-color: #5cb85c;
+}
+.red{
+    background-color: #d9534f;
+}
+.grey
+{
+    background-color: #dcdcdc;
+}
+
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Check Your BMI</h1>
+        <div class="bmi-container">
+            <p id="result">Select height and weight and check for your BMI</p>
+          
+            <div class="form-control">
+                <label>Height</label>
+                <input type="range" id="height" name="height" min="50" max="400" value="100" oninput="calculate()">
+                <span id="cm">100 cm</span>
+            </div>
+            <div class="form-control">
+               <label>Weight</label>
+                <input type="range" id="weight" name="weight" min="50" max="400" value="100" oninput="calculate()">
+                <span id="kg">100 kg</span>
+            </div>
+        </div>
+        <p>If Your BMI is less 18 then you are underweight</p>
+        <p>If Your BMI is less than 24 and greater than 18 then your are normal weight</p>
+        <p>If Your BMI is more than 24 and less than 29 then you are overweight</p>
+        <p>If Your BMI is more than 29 then you are obese</p>
+    </div>
+
+    <script>
+        //calculate();
+        function calculate() {
+            var height = parseInt(document.getElementById('height').value);
+            var weight = parseInt(document.getElementById('weight').value);
+            document.getElementById('cm').innerHTML = height + ' cm';
+            document.getElementById('kg').innerHTML = weight + ' kg';
+            var bmi = Math.round(weight / (height / 100 * height / 100));
+            if(bmi < 18){
+                document.getElementById('result').innerHTML = 'Your BMI is ' + bmi + ' You are underweight';
+                // add class grey
+                document.getElementById('result').style.backgroundColor = '#ffc107';
+            }else if(bmi >= 18.5 && bmi <= 24){
+                document.getElementById('result').innerHTML = 'Your BMI is ' + bmi + ' You are normal weight';
+                // add class green 
+                document.getElementById('result').style.backgroundColor = '#0eec0e';
+            }else if(bmi >= 25 && bmi <= 29){
+                document.getElementById('result').innerHTML = 'Your BMI is ' + bmi + ' You are overweight';
+                // add class red
+                document.getElementById('result').style.backgroundColor = '#e6606d';
+            }else if(bmi >= 30){
+                document.getElementById('result').innerHTML = 'Your BMI is ' + bmi + ' You are obese';
+                // add class red
+                document.getElementById('result').style.backgroundColor = '#f10808';
+            }
+        
+           // result.innerHTML = bmi;
+        }
+    </script>
+</body>
+</html>
